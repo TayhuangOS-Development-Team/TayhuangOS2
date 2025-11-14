@@ -19,9 +19,23 @@
 #include <stdbool.h>
 #include <multiboot2.h>
 
+#include <init/init.h>
+#include <libs/debug.h>
+
 void init() {
-    while(true);
-    log_debug("Loader initialization!");
+    init_gdt();
+
+    init_serial();
+    init_logger(write_serial_str, "Loader");
+
+    log_debug("Loader initializing!");
+
+    init_pic();
+    init_idt();
+
+    // doing sth...
+
+    sti();
 }
 
 int main() {
@@ -31,6 +45,7 @@ int main() {
 
 void terminate() {
     log_debug("Loader termination!");
+    while(true);
 }
 
 /**
@@ -38,13 +53,13 @@ void terminate() {
  *
  */
 void setup(void) {
-    register int magic_number __asm__("eax"); //Loader 魔数 存放在eax
+    register int magic_number __asm__("eax"); //Loader magic number 存放在eax
     register struct multiboot_tag *multiboot_info __asm__("ebx"); //multiboot info 存放在ebx
 
     // 设置栈
     asm volatile ("movl $0x1000000, %esp");
 
-    if (magic_number != MULTIBOOT2_BOOTLOADER_MAGIC) { //魔数不匹配
+    if (magic_number != MULTIBOOT2_BOOTLOADER_MAGIC) { //magic number 不匹配
         while (true);
     }
 

@@ -138,12 +138,12 @@ typedef union cr3_t {
         /** 保留 bit 5~11*/
         byte reserved3 : 7;
         /** 页表地址 bit 12~50 */
-        qword _pageEntry : 39;
+        qword _page_entry : 39;
         /** 保留 bit 51~63 */
         word reserved : 13;
     };
     /** 页表地址 */
-    qword pageEntry;
+    qword page_entry;
 } CR3;
 
 /** CR3页表地址掩码 */

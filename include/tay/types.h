@@ -36,21 +36,21 @@ typedef uint64_t b64;
 // 获取机器位数
 #if BITS==16
 /** 机器位数 */
-typedef b16 MachineBits;
+typedef b16 machine_bits;
 #elif BITS==32
 /** 机器位数 */
-typedef b32 MachineBits;
+typedef b32 machine_bits;
 #elif BITS==64
 /** 机器位数 */
-typedef b64 MachineBits;
+typedef b64 machine_bits;
 #else
 /** 机器位数 */
-typedef b64 MachineBits;
+typedef b64 machine_bits;
 #endif
 
 /** 段寄存器 */
-typedef b16 SegmentRegister;
+typedef b16 sreg_t;
 /** 寄存器 */
-typedef MachineBits Register;
+typedef machine_bits reg_t;
 /** 机器位数 */
-typedef MachineBits MBits;
+typedef machine_bits mbits_t;

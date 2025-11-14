@@ -250,7 +250,7 @@ typedef struct DescStruct Descriptor;
  * @param raw 未处理过的描述符
  * @return 处理后的描述符
  */
-inline static Descriptor BuildDesc(RawDesc raw) {
+inline static Descriptor build_desc(RawDesc raw) {
 	Descriptor desc;
 
 	desc.limit0 = raw.limit;
@@ -392,7 +392,7 @@ typedef struct GateStruct GateDescriptor;
  * @param cs 代码段描述符
  * @return 门描述符
  */
-inline static GateDescriptor BuildGate(byte type, void *ptr, byte privilege, int cs) {
+inline static GateDescriptor build_gate(byte type, void *ptr, byte privilege, int cs) {
     dword base = (dword)ptr;
 	GateDescriptor desc = {};
     desc.offset0 = base & 0xFFFF; //偏移
@@ -417,7 +417,7 @@ inline static GateDescriptor BuildGate(byte type, void *ptr, byte privilege, int
  * @param cs 代码段描述符
  * @return 门描述符
  */
-inline static GateDescriptor BuildGate(byte type, void *ptr, byte privilege, int cs) {
+inline static GateDescriptor build_gate(byte type, void *ptr, byte privilege, int cs) {
     dword base = (dword)ptr;
 	GateDescriptor desc = {};
     desc.offset0 = base & 0xFFFF; //偏移

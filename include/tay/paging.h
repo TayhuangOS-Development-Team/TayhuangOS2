@@ -432,7 +432,7 @@ typedef union {
  * @param page4k 4K页面
  * @return 4K页面地址
  */
-static inline dword Get4KPageAddress(PageEntry4K page4k) {
+static inline dword get_4k_page_addr(PageEntry4K page4k) {
     return page4k.address & PAGE_ENTRY_4K_MASK;
 }
 
@@ -442,7 +442,7 @@ static inline dword Get4KPageAddress(PageEntry4K page4k) {
  * @param page2m 2M页面
  * @return 2M页面地址
  */
-static inline dword Get2MPageAddress(PageEntry2M page2m) {
+static inline dword get_2m_page_addr(PageEntry2M page2m) {
     return page2m.address & PAGE_ENTRY_2M_MASK;
 }
 
@@ -452,7 +452,7 @@ static inline dword Get2MPageAddress(PageEntry2M page2m) {
  * @param page1g 1G页面
  * @return 1G页面地址
  */
-static inline dword Get1GPageAddress(PageEntry1G page1g) {
+static inline dword get_1g_page_addr(PageEntry1G page1g) {
     return page1g.address & PAGE_ENTRY_1G_MASK;
 }
 
@@ -462,8 +462,8 @@ static inline dword Get1GPageAddress(PageEntry1G page1g) {
  * @param pagingTable 页表
  * @return 页表地址
  */
-static inline dword GetPagingTableAddress(PagingTableEntry pagingTable) {
-    return pagingTable.address & PAGING_TABLE_ENTRY_MASK;
+static inline dword get_pagingtab_addr(PagingTableEntry paging_tab) {
+    return paging_tab.address & PAGING_TABLE_ENTRY_MASK;
 }
 
 /**
@@ -475,7 +475,7 @@ typedef union {
      * @brief 指向4K页
      * 
      */
-    PageEntry4K refPageEntry;
+    PageEntry4K ref_page_entry;
 } PTE;
 
 /**
@@ -487,12 +487,12 @@ typedef union {
      * @brief 指向2M页
      * 
      */
-    PageEntry2M refPageEntry;
+    PageEntry2M ref_page_entry;
     /**
      * @brief 指向PT
      * 
      */
-    PagingTableEntry refPTEntry;
+    PagingTableEntry ref_pt_entry;
 } PDE;
 
 /**
@@ -504,12 +504,12 @@ typedef union {
      * @brief 指向1G页
      * 
      */
-    PageEntry1G refPageEntry;
+    PageEntry1G ref_page_entry;
     /**
      * @brief 指向PD
      * 
      */
-    PagingTableEntry refPDEntry;
+    PagingTableEntry ref_pde_entry;
 } PDPTE;
 
 /**
@@ -521,7 +521,7 @@ typedef union {
      * @brief 指向PDPT
      * 
      */
-    PagingTableEntry refPDPTEntry;
+    PagingTableEntry ref_pdpt_entry;
 } PML4E;
 
 /**
@@ -533,7 +533,7 @@ typedef union {
      * @brief 指向PML4E
      * 
      */
-    PagingTableEntry refPML4EEntry;
+    PagingTableEntry ref_pml4e_entry;
 } PML5E;
 
 /**
@@ -550,50 +550,50 @@ typedef union {
  * @brief 每表PTE数
  * 
  */
-#define PTEPerTable    (PAGE_TABLE_SIZE / sizeof(PTE))
+#define PTE_PER_TAB    (PAGE_TABLE_SIZE / sizeof(PTE))
 /**
  * @brief 每表PDE数
  * 
  */
-#define PDEPerTable    (PAGE_TABLE_SIZE / sizeof(PDE))
+#define PDE_PER_TAB    (PAGE_TABLE_SIZE / sizeof(PDE))
 /**
  * @brief 每表PDPTE数
  * 
  */
-#define PDPTEPerTable  (PAGE_TABLE_SIZE / sizeof(PDPTE))
+#define PDPTE_PER_TAB  (PAGE_TABLE_SIZE / sizeof(PDPTE))
 /**
  * @brief 每表PML4E数
  * 
  */
-#define PML4EPerTable  (PAGE_TABLE_SIZE / sizeof(PML4E))
+#define PML4E_PER_TAB  (PAGE_TABLE_SIZE / sizeof(PML4E))
 /**
  * @brief 每表PML5E数
  * 
  */
-#define PML5EPerTable  (PAGE_TABLE_SIZE / sizeof(PML5E))
+#define PML5E_PER_TAB  (PAGE_TABLE_SIZE / sizeof(PML5E))
 
 /**
  * @brief PT
  * 
  */
-typedef PTE PT[PTEPerTable];
+typedef PTE PT[PTE_PER_TAB];
 /**
  * @brief PD
  * 
  */
-typedef PDE PD[PDEPerTable];
+typedef PDE PD[PDE_PER_TAB];
 /**
  * @brief PDPT
  * 
  */
-typedef PDPTE PDPT[PDPTEPerTable];
+typedef PDPTE PDPT[PDPTE_PER_TAB];
 /**
  * @brief PML4
  * 
  */
-typedef PML4E PML4[PML4EPerTable];
+typedef PML4E PML4[PML4E_PER_TAB];
 /**
  * @brief PML5
  * 
  */
-typedef PML5E PML5[PML5EPerTable];
+typedef PML5E PML5[PML5E_PER_TAB];

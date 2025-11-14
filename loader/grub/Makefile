@@ -9,7 +9,7 @@ target := $(path-bin)/grub/grubld.bin
 
 objects := main.o
 
-subdirs := libs/
+subdirs := libs/ init/
 
 include $(foreach subdir, $(subdirs), $(path-d)/$(subdir)/include.mk)
 
